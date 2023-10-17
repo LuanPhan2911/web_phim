@@ -2,25 +2,41 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
+use App\Models\Country;
+use App\Models\Genre;
 use Illuminate\Http\Request;
 
 class IndexController extends Controller
 {
     public function home()
     {
-        return view('pages.home');
+        $categories = Category::all();
+        $genres = Genre::all();
+        $countries = Country::all();
+        return view('pages.home', compact('categories', 'genres', 'countries'));
     }
-    public function category()
+    public function category(Category $category)
+
     {
-        return view('pages.category');
+        $categories = Category::all();
+        $genres = Genre::all();
+        $countries = Country::all();
+        return view('pages.category', compact('categories', 'genres', 'countries', 'category'));
     }
-    public function genre()
+    public function genre(Genre $genre)
     {
-        return view('pages.genre');
+        $categories = Category::all();
+        $genres = Genre::all();
+        $countries = Country::all();
+        return view('pages.genre', compact('categories', 'genres', 'countries', 'genre'));
     }
-    public function country()
+    public function country(Country $country)
     {
-        return view('pages.country');
+        $categories = Category::all();
+        $genres = Genre::all();
+        $countries = Country::all();
+        return view('pages.country', compact('categories', 'genres', 'countries', 'country'));
     }
     public function movie()
     {

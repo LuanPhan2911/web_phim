@@ -96,8 +96,8 @@
                <div class="collapse navbar-collapse" id="halim">
                   <div class="menu-menu_1-container">
                      <ul id="menu-menu_1" class="nav navbar-nav navbar-left">
-                        <li class="current-menu-item active"><a title="Trang Chủ" href="index.php">Trang Chủ</a></li>
-                        <li class="mega"><a title="Phim Mới" href="danhmuc.php">Phim Mới</a></li>
+                        <li class="current-menu-item active"><a title="Trang Chủ" href="{{route("home")}}">Trang Chủ</a></li>
+                      
                         {{-- <li class="mega dropdown">
                            <a title="Năm" href="#" data-toggle="dropdown" class="dropdown-toggle" aria-haspopup="true">Năm <span class="caret"></span></a>
                            <ul role="menu" class=" dropdown-menu">
@@ -109,20 +109,25 @@
                         <li class="mega dropdown">
                            <a title="Thể Loại" href="#" data-toggle="dropdown" class="dropdown-toggle" aria-haspopup="true">Thể Loại <span class="caret"></span></a>
                            <ul role="menu" class=" dropdown-menu">
-                              <li><a title="Tâm Lý" href="{{route('category')}}">Tâm Lý</a></li>
+                            @foreach ($genres as $each)
+                            <li><a title="{{$each->title}}" href="{{route('genre', $each->slug)}}">{{$each->title}}</a></li>
+                            @endforeach
                               
                            </ul>
                         </li>
                         <li class="mega dropdown">
                            <a title="Quốc Gia" href="#" data-toggle="dropdown" class="dropdown-toggle" aria-haspopup="true">Quốc Gia <span class="caret"></span></a>
                            <ul role="menu" class=" dropdown-menu">
-                              <li><a title="Việt nam" href="{{route('country')}}">Việt nam</a></li>
+                             @foreach ($countries as $each)
+                             <li><a title="{{$each->title}}" href="{{route('country', $each->slug)}}">{{$each->title}}</a></li>
+                             @endforeach
                              
                            </ul>
                         </li>
-                        <li><a title="Phim Lẻ" href="danhmuc.php">Phim Lẻ</a></li>
-                        <li><a title="Phim Bộ" href="danhmuc.php">Phim Bộ</a></li>
-                        <li><a title="Phim Chiếu Rạp" href="danhmuc.php">Phim Chiếu Rạp</a></li>
+                      @foreach ($categories as $each )
+                      <li class="mega"><a title="{{$each->title}}" href="{{route('category', $each->slug)}}">{{$each->title}}</a></li>
+                      @endforeach
+                       
                      </ul>
                   </div>
                   <ul class="nav navbar-nav navbar-left" style="background:#000;">

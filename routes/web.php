@@ -1,6 +1,11 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CountryController;
+use App\Http\Controllers\GenreController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\IndexController;
+use App\Http\Controllers\MovieController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -16,14 +21,25 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [IndexController::class, 'home'])->name('home');
-Route::get('/category', [IndexController::class, 'category'])->name('category');
-Route::get('/country', [IndexController::class, 'country'])->name('country');
-Route::get('/genre', [IndexController::class, 'genre'])->name('genre');
+Route::get('/category/{category:slug}', [IndexController::class, 'category'])->name('category');
+Route::get('/country/{country:slug}', [IndexController::class, 'country'])->name('country');
+Route::get('/genre/{genre:slug}', [IndexController::class, 'genre'])->name('genre');
 Route::get('/episode', [IndexController::class, 'episode'])->name('episode');
 Route::get('/movie', [IndexController::class, 'movie'])->name('movie');
 Route::get('/watch', [IndexController::class, 'watch'])->name('watch');
 
 Auth::routes();
 
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::group(
+    [
+        'prefix' => 'admin',
+        'as' => 'admin.'
+    ],
+    function () {
+        Route::get('/', [HomeController::class, 'index'])->name('home');
+        Route::resource('/country', CountryController::class);
+        Route::resource('/category', CategoryController::class);
+        Route::resource('/genre', GenreController::class);
+        Route::resource('/movie', MovieController::class);
+    }
+);
