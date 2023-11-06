@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Sluggable\HasSlug;
@@ -13,11 +14,16 @@ class Category extends Model
     use HasSlug;
 
 
+
     public $fillable = ['title', 'description', 'status'];
     public function getSlugOptions(): SlugOptions
     {
         return SlugOptions::create()
             ->generateSlugsFrom('title')
             ->saveSlugsTo('slug');
+    }
+    public function movies()
+    {
+        return $this->hasMany(Movie::class);
     }
 }

@@ -14,7 +14,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
+        $categories = Category::orderBy("position", "ASC")->get();
         return view(
             'admin.category.index',
             [
@@ -74,5 +74,19 @@ class CategoryController extends Controller
     {
         $category->delete();
         return redirect()->back();
+    }
+
+    public function sorting(Request $request)
+    {
+        $categories_id = $request->get("categories_id");
+
+        foreach ($categories_id as $index => $value) {
+            $position = $index + 1;
+
+            $category = Category::find($value);
+            $category->position = $position;
+
+            $category->save();
+        }
     }
 }

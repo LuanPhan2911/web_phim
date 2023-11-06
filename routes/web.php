@@ -25,7 +25,10 @@ Route::get('/category/{category:slug}', [IndexController::class, 'category'])->n
 Route::get('/country/{country:slug}', [IndexController::class, 'country'])->name('country');
 Route::get('/genre/{genre:slug}', [IndexController::class, 'genre'])->name('genre');
 Route::get('/episode', [IndexController::class, 'episode'])->name('episode');
-Route::get('/movie', [IndexController::class, 'movie'])->name('movie');
+Route::get('/movie/{movie:slug}', [IndexController::class, 'movie'])->name('movie');
+Route::get('/publish/{year}', [IndexController::class, 'publish'])->name('publish');
+Route::get('/hashtag/{tag}', [IndexController::class, 'hashtag'])->name('hashtag');
+
 Route::get('/watch', [IndexController::class, 'watch'])->name('watch');
 
 Auth::routes();
@@ -41,5 +44,7 @@ Route::group(
         Route::resource('/category', CategoryController::class);
         Route::resource('/genre', GenreController::class);
         Route::resource('/movie', MovieController::class);
+
+        Route::post("/category/sort", [CategoryController::class, "sorting"])->name("category.sort");
     }
 );

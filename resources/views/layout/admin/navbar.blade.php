@@ -16,7 +16,10 @@
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="{{route('admin.country.index')}}">Country</a>
           </li>
-          
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{{route('admin.movie.index')}}">Movie</a>
+          </li>
+
         </ul>
         <form class="d-flex" role="search">
           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
